@@ -29,4 +29,9 @@ public class SecurityUitils {
             return true;
         }
     }
+
+    /*public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        String s = encryptPassword("123456");
+        System.out.println(s);
+    }*/
 }

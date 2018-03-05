@@ -50,7 +50,7 @@
             1)加入对静态资源的处理
             2）允许使用"/"做整体映射
         -->
-    <mvc:default-servlet-handler/>
+    <!--<mvc:default-servlet-handler/>-->
 
     <!-- todo 2.静态资源处理， css， js， imgs -->
     <mvc:resources mapping="/static/**" location="/static/" />
