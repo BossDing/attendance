@@ -14,4 +14,6 @@ public interface AttendMapper {
     int updateByPrimaryKeySelective(Attend record);
 
     int updateByPrimaryKey(Attend record);
+
+    Attend getTodayRecord(Long userId);
 }
