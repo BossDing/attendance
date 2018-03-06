@@ -1,6 +1,6 @@
 package com.kay.user.service;
 
-import com.kay.common.uits.SecurityUitils;
+import com.kay.common.utils.SecurityUitils;
 import com.kay.user.dao.UserMapper;
 import com.kay.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -29,6 +29,53 @@
     AND attend_date=CURDATE()
   </select>
 
+  <select id="getCountByCondition" resultType="int">
+    SELECT COUNT(id)
+    FROM attend
+    WHERE user_id=#{userId}
+    <if test="startDate != null and endDate !=null" >
+      AND attend_date BETWEEN #{startDate} AND #{endDate}
+    </if>
+  </select>
+
+  <select id="getListByCondition" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM attend
+    WHERE user_id=#{userId}
+    <if test="startDate != null and endDate !=null" >
+      AND attend_date BETWEEN #{startDate} AND #{endDate}
+    </if>
+    limit #{startRow},#{pageSize}
+  </select>
+
+  <!--查询今天没有签到的人-->
+  <select id="selectTodayAbsence" resultType="java.lang.Long">
+    SELECT u.id
+    FROM user u
+    WHERE u.id NOT IN (SELECT a.user_id FROM attend a WHERE a.attend_date=CURDATE())
+  </select>
+
+  <!--批量插入-->
+  <insert id="batchInsert" parameterType="list">
+    INSERT INTO attend (user_id, attend_date, attend_week, absence,attend_status)
+    VALUES
+    <foreach collection="list" index="index" item="item" separator=",">
+      (#{item.userId}, #{item.attendDate},#{item.attendWeek}, #{item.absence},#{item.attendStatus})
+    </foreach>
+  </insert>
+
+  <!-- 查询晚上没有签到的人,排除周末 -->
+  <select id="selectTodayEveningAbsence" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from attend
+    where
+    attend_date= CURDATE()
+    AND attend_evening IS NULL
+    AND attend_status =1
+    AND attend_week NOT IN (6,7)
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from attend

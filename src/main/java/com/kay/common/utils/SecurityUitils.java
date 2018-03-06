@@ -1,4 +1,4 @@
-package com.kay.common.uits;
+package com.kay.common.utils;
 
 import sun.misc.BASE64Encoder;
 

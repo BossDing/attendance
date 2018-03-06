@@ -1,5 +1,6 @@
 package com.kay.common.pape;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -67,7 +68,7 @@ public class PageQueryBean {
     }
 
     public final List<?> getItems() {
-        return items;
+        return items == null ? Collections.EMPTY_LIST : items;
     }
 
     public final void setItems(List<?> items) {
