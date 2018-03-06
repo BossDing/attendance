@@ -3,11 +3,14 @@ package com.kay.attend.service.impl;
 import com.kay.attend.dao.AttendMapper;
 import com.kay.attend.entity.Attend;
 import com.kay.attend.service.AttendService;
+import com.kay.attend.vo.QueryCondition;
+import com.kay.common.pape.PageQueryBean;
 import com.kay.common.uits.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by kay on 2018/3/5.
@@ -21,6 +24,30 @@ public class AttendServiceImpl implements AttendService {
 
     @Autowired
     private AttendMapper attendMapper;
+
+    /**
+     * 查询签到记录分页列表
+     * @param condition
+     * @return
+     */
+    @Override
+    public PageQueryBean getAttendList(QueryCondition condition) {
+
+        int count=attendMapper.getCountByCondition(condition);
+
+        PageQueryBean resultBean = new PageQueryBean();
+
+        //有记录再取查询分页
+        if (count > 0) {
+            List<Attend> attendList=attendMapper.getListByCondition(condition);
+            resultBean.setTotalRows(count);
+            resultBean.setCurrentPage(condition.getCurrentPage());
+            resultBean.setStartRow(condition.getStartRow());
+            resultBean.setItems(attendList);
+        }
+
+        return resultBean;
+    }
 
     /**
      * 打卡业务
@@ -60,9 +87,6 @@ public class AttendServiceImpl implements AttendService {
             //更新打卡时间
             attendMapper.updateByPrimaryKeySelective(recordOfToday);
         }
-
-
-
 
     }
 }
