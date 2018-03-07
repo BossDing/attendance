@@ -44,7 +44,8 @@
       #{currentHandler,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{comments,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.kay.workflow.entity.ReAttend" >
+  <insert id="insertSelective" parameterType="com.kay.workflow.entity.ReAttend" useGeneratedKeys="true"
+          keyProperty="id">
     insert into re_attend
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by kay on 2017/7/7.
  */
-public class SecurityUitils {
+public class MD5Uitils {
 
     //密码加密
     public static String encryptPassword(String pwd) throws NoSuchAlgorithmException, UnsupportedEncodingException {

@@ -3,6 +3,7 @@ package com.kay.workflow.controller;
 import com.kay.user.entity.User;
 import com.kay.workflow.entity.ReAttend;
 import com.kay.workflow.service.ReAttendService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +39,7 @@ public class ReAttendController {
         reAttendService.startReAttendFlow(reAttend);
     }
 
+    @RequiresPermissions("reAttend:list")
     @RequestMapping("/list")
     public String listReAttendFlow(Model model, HttpSession session) {
         User user= (User) session.getAttribute("userinfo");

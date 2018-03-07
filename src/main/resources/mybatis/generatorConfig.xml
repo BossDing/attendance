@@ -38,7 +38,7 @@
         <!-- 必须的（1 required） -->
         <!-- java模型生成器 -->
         <!-- targetProject:自动生成代码的位置 -->
-        <javaModelGenerator targetPackage="com.kay.workflow.entity"
+        <javaModelGenerator targetPackage="com.kay.attend.entity"
                             targetProject="E:\workspace\java\attendance\src\main\java"
         >
             <!-- TODO enableSubPackages:是否让schema作为包的后缀 -->
@@ -49,14 +49,14 @@
 
         <!-- 必须的（1 required） -->
         <!-- map xml 生成器 -->
-        <sqlMapGenerator targetPackage="com.kay.workflow.dao"
+        <sqlMapGenerator targetPackage="com.kay.attend.dao"
                          targetProject="E:\workspace\java\attendance\src\main\java">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- 可选的（0 or 1） -->
         <!-- mapper 或者就是dao接口生成器 -->
-        <javaClientGenerator targetPackage="com.kay.workflow.dao"
+        <javaClientGenerator targetPackage="com.kay.attend.dao"
                              targetProject="E:\workspace\java\attendance\src\main\java"
                              type="XMLMAPPER">
             <property name="enableSubPackages" value="true" />
@@ -74,6 +74,8 @@
             <!--//无论字段是什么类型，生成的类属性都是varchar。 可选的（0 or 1） 测试无效 -->
             <!-- <columnOverride column="city_code" jdbcType="VARCHAR" /> -->
         </table>
+
+
 
 
     </context>

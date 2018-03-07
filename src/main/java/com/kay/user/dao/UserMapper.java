@@ -15,10 +15,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    /**
-     * 根据用户名取出用户
-     * @param username
-     * @return
-     */
-    User getUserByName(String username);
+    User selectByUserName(String username);
 }

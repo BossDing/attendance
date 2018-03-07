@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring/spring-config.xml",
+@ContextConfiguration({"classpath:spring/spring-config.xml", "classpath:spring/spring-shiro.xml",
         "classpath:spring/spring-mvc.xml"})
 public class UserServiceImplTest {
 
@@ -34,5 +34,11 @@ public class UserServiceImplTest {
     public void checkUser() throws Exception {
         User f=userService.checkUser("kay","123456");
         System.out.println("-----------------------------"+f);
+    }
+
+    @Test
+    public void selectByUserName() throws Exception {
+        User kay = userService.findUserByUserName("kay");
+
     }
 }

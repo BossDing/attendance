@@ -1,6 +1,6 @@
 package com.kay.user.service;
 
-import com.kay.common.utils.SecurityUitils;
+import com.kay.common.utils.MD5Uitils;
 import com.kay.user.dao.UserMapper;
 import com.kay.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insertUser(User user) {
         try {
-            String encodePwd= SecurityUitils.encryptPassword(user.getPassword());
+            String encodePwd= MD5Uitils.encryptPassword(user.getPassword());
             user.setPassword(encodePwd);
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,13 +36,13 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User checkUser(String username,String inputPwd) {
-        User user=userMapper.getUserByName(username);
+        User user=userMapper.selectByUserName(username);
 
         if(user==null){
             return null;
         }else {
             try {
-               if(SecurityUitils.checkPassword(inputPwd,user.getPassword())){
+               if(MD5Uitils.checkPassword(inputPwd,user.getPassword())){
                    return user;
                }else {
                    return null;
@@ -52,5 +52,11 @@ public class UserServiceImpl implements UserService {
                 throw new RuntimeException("密码验证过程中出现错误！",e);
             }
         }
+    }
+
+    @Override
+    public User findUserByUserName(String username) {
+        User user=userMapper.selectByUserName(username);
+        return user;
     }
 }
